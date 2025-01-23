@@ -9,9 +9,10 @@ const messages = [
 ];
 
 // 获取元素
-const messageElement = document.getElementById('message');
+const messageElements = document.querySelectorAll('.message');
 const canvas = document.getElementById('backgroundCanvas');
 const ctx = canvas.getContext('2d');
+const audio = document.getElementById('backgroundAudio');
 
 // 设置画布大小
 canvas.width = window.innerWidth;
@@ -22,16 +23,20 @@ function drawBackground() {
   // 清空画布
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  // 绘制白色背景
-  ctx.fillStyle = '#fff';
+  // 绘制黑色背景
+  ctx.fillStyle = '#000';
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
   // 绘制像素风格的蛇
-  const snakeSize = 20;
+  const snakeBody = [
+    {x: 50, y: 50}, {x: 70, y: 50}, {x: 90, y: 50}, {x: 110, y: 50},
+    {x: 130, y: 50}, {x: 150, y: 50}, {x: 170, y: 50}, {x: 190, y: 50},
+    {x: 210, y: 50}, {x: 230, y: 50}
+  ];
   ctx.fillStyle = '#0f0';
-  for (let i = 0; i < 10; i++) {
-    ctx.fillRect(i * snakeSize, 50, snakeSize, snakeSize);
-  }
+  snakeBody.forEach(segment => {
+    ctx.fillRect(segment.x, segment.y, 20, 20);
+  });
 
   // 绘制像素风格的福字
   const fuSize = 50;
@@ -46,21 +51,12 @@ function drawBackground() {
 
 // 显示祝福语
 function showMessages() {
-  let index = 0;
-  const interval = setInterval(() => {
-    if (index < messages.length) {
-      messageElement.textContent = messages[index];
-      messageElement.style.opacity = 1;
-      setTimeout(() => {
-        messageElement.style.opacity = 0;
-      }, 2000);
-      index++;
-    } else {
-      clearInterval(interval);
-    }
-  }, 3000);
+  messageElements.forEach((element, index) => {
+    element.textContent = messages[index];
+  });
 }
 
 // 初始化
 drawBackground();
 showMessages();
+audio.play();
