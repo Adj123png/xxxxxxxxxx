@@ -1,9 +1,9 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: Arial, sans-serif;
-  background-color: #fff;
-  color: #000;
+  font-family: 'Press Start 2P', cursive; /* 像素风格字体 */
+  background-color: #000;
+  color: #fff;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -18,10 +18,49 @@ body {
   text-align: center;
 }
 
-#message {
-  font-size: 24px;
+#message-container {
   opacity: 0;
-  transition: opacity 1s ease-in-out;
+  animation: fadeIn 5s ease-in-out 1s forwards;
+}
+
+.message {
+  font-size: 20px;
+  margin: 10px 0;
+  transform: translateY(20px);
+  opacity: 0;
+  animation: slideIn 1s ease-in-out forwards;
+}
+
+.message:nth-child(1) {
+  animation-delay: 1s;
+}
+.message:nth-child(2) {
+  animation-delay: 2s;
+}
+.message:nth-child(3) {
+  animation-delay: 3s;
+}
+.message:nth-child(4) {
+  animation-delay: 4s;
+}
+.message:nth-child(5) {
+  animation-delay: 5s;
+}
+.message:nth-child(6) {
+  animation-delay: 6s;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 #backgroundCanvas {
